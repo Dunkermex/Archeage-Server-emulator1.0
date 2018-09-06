@@ -1,4 +1,5 @@
-﻿using ArcheAge.ArcheAge.Network;
+﻿using ArcheAge.ArcheAge.Holders;
+using ArcheAge.ArcheAge.Network;
 using ArcheAge.ArcheAge.Network.Connections;
 using ArcheAge.Properties;
 using LocalCommons.Logging;
@@ -53,24 +54,19 @@ namespace ArcheAge
                 Console.WriteLine("AutoSelectServerClientVersion:" + Settings.Default.ServerClientVersion);
                 Program.ServerClientVersion = Settings.Default.ServerClientVersion;
             }
-
         }
 
         static void Key_Pressed()
         {
             ConsoleKeyInfo info = Console.ReadKey();
-            if (info != null)
-            {
-                Key_Pressed();
-            }
+            if (info == null) return;
+            Key_Pressed();
         }
 
         static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
-            if (e.SpecialKey == ConsoleSpecialKey.ControlC)
-            {
-                Shutdown();
-            }
+            if (e.SpecialKey != ConsoleSpecialKey.ControlC) return;
+            Shutdown();
         }
 
         static void Shutdown()
@@ -93,8 +89,9 @@ namespace ArcheAge
             Logger.Init(); //Load Logger
             LocalCommons.Main.InitializeStruct(args); //Initializing LocalCommons.dll
 
-            //------ Binary ------------------------------------------
-            //Logger.Section("Binary data");
+            //--------------- MySQL ---------------------------
+            Logger.Section("MySQL");
+            CharacterHolder.LoadCharacterData();
 
             //------ Network ------------------------------------------
             Logger.Section("network connection");
@@ -102,8 +99,6 @@ namespace ArcheAge
             InstallLoginServer();
             new AsyncListener(Settings.Default.ArcheAge_IP, Settings.Default.ArcheAge_Port, typeof(ClientConnection)); //Waiting For ArcheAge Connections
         }
-
-        //Original
 
         static void InstallLoginServer()
         {
@@ -122,27 +117,5 @@ namespace ArcheAge
             else
                 InstallLoginServer();
         }
-
-
-        //Data used for testing
-        //static void InstallLoginServer()
-        //{
-        //    IPEndPoint point = new IPEndPoint(IPAddress.Parse("101.226.100.108"), 1239);
-        //    Socket con = new Socket(point.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-        //    try
-        //    {
-        //        con.Connect(point);
-        //    }
-        //    catch (Exception exp)
-        //    {
-        //        //throw exp;
-        //        Logger.Trace("Unable to connect to login server, retry after 1 second");
-        //    }
-        //    if (con.Connected)
-        //        new LoginConnection(con);
-        //    else
-        //        InstallLoginServer();
-        //}
-
     }
 }

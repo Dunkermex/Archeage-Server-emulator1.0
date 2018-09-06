@@ -133,7 +133,7 @@ namespace ArcheAge.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("root")]
+        [global::System.Configuration.DefaultSettingValueAttribute("123456")]
         public string DataBase_Password {
             get {
                 return ((string)(this["DataBase_Password"]));
@@ -145,7 +145,7 @@ namespace ArcheAge.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("archeage_world")]
+        [global::System.Configuration.DefaultSettingValueAttribute("archeage")]
         public string DataBase_Name {
             get {
                 return ((string)(this["DataBase_Name"]));
@@ -164,6 +164,18 @@ namespace ArcheAge.Properties {
             }
             set {
                 this["ServerClientVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SSL {
+            get {
+                return ((bool)(this["SSL"]));
+            }
+            set {
+                this["SSL"] = value;
             }
         }
     }

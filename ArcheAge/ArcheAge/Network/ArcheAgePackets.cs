@@ -588,7 +588,7 @@ namespace ArcheAge.ArcheAge.Network
             //FinishState
             //ChangeState
             //FinishState
-            //S>C ChangeState
+            //S>A ChangeState
             //FinishState
             //ChangeState
             //13000005 3FEC 7AE6F77724BFFE32891D4BFE53B655
